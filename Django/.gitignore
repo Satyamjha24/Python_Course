@@ -1,0 +1,39 @@
+# Virtual environment
+venv/
+env/
+*.pyc
+__pycache__/
+myenv/
+# Static files
+staticfiles/
+
+# Media files
+media/
+
+# Database
+db.sqlite3
+
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Local development settings
+settings_local.py
+
+# Secret keys
+*.secret_key
+
+# IDE and editor specific files
+.idea/
+.vscode/
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Log files
+*.log
+
+# Mac OS specific files
+.DS_Store

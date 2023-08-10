@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Page</title>
+</head>
+<body>
+    <h1>Delete a Key</h1>
+    <form method="post" action="{% url 'delete' %}">
+        {% csrf_token %}
+        <label for="key">Key to Delete:</label>
+        <input type="text" name="key"><br>
+        <button type="submit">Delete</button>
+    </form>
+    <a href="/read">Read Data</a>
+    <a href="/create">Create Data</a>
+    <a href="/update">Update Data</a>
+</body>
+</html>
