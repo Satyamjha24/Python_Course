@@ -1,0 +1,22 @@
+{
+    "builds": [
+        {
+            "src": "crudapp/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.9"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "crudapp/wsgi.py"
+        }
+    ],
+    "env": {
+        "DJANGO_SETTINGS_MODULE": "crudapp.settings",
+        "SECRET_KEY": "django-insecure-$#=hx==sw6!3w!68v6(w8z1c&l!c^uojwzw&d)+r40u$baver#"
+      }
+}
