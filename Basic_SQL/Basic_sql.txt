@@ -158,3 +158,56 @@ Problem: Write a query to delete the ride with id 2.
 
     -----------------------------------------------------  SET-4  ------------------------------------------------------------
 
+Problem: Write a query to find the ride with the highest and lowest fare.
+   For the ride with the highest fare:
+      SELECT * FROM Rides ORDER BY fare DESC LIMIT 1;
+
+   For the ride with the lowest fare:
+      SELECT * FROM Rides ORDER BY fare ASC LIMIT 1;
+
+Problem: Write a query to find the average fare and distance for each driver_id.
+    SELECT driver_id, AVG(fare) AS average_fare, AVG(distance) AS average_distance
+    FROM Rides
+    GROUP BY driver_id;
+
+Problem: Write a query to find driver_id that have completed more than 5 rides.
+    SELECT driver_id, COUNT(*) AS ride_count
+    FROM Rides
+    GROUP BY driver_id
+    HAVING COUNT(*) > 5;
+
+roblem: Assuming there is another collection/table called Drivers with driver_id and name fields, write a query to find the name of the driver with the highest fare.
+    SELECT D.name
+    FROM Drivers D
+    JOIN Rides R ON D.driver_id = R.driver_id
+    ORDER BY R.fare DESC
+    LIMIT 1;
+
+Problem: Write a query to find the top 3 drivers who have earned the most from fares. Return the drivers' ids and total earnings.
+    SELECT R.driver_id, SUM(R.fare) AS total_earnings
+    FROM Rides R
+    GROUP BY R.driver_id
+    ORDER BY total_earnings DESC
+    LIMIT 3;
+    
+Problem: Assuming there's a ride_date field of date type in the Rides table / collection, write a query to find all rides that happened in the last 7 days.
+    SELECT *
+    FROM Rides
+    WHERE ride_date >= CURDATE() - INTERVAL 7 DAY AND ride_date <= CURDATE();
+
+Problem: Write a query to find all rides where the end_location is not set.
+    SELECT * FROM Rides WHERE end_location IS NULL OR end_location = '';
+    
+Problem: Write a query to calculate the fare per mile for each ride and return the ride ids and their fare per mile, ordered by fare per mile in descending order.
+   SELECT id, fare / distance AS fare_per_mile
+   FROM Rides ORDER BY fare_per_mile DESC;
+      
+Problem: Assuming there's another collection/table Passengers with passenger_id and name fields, write a query to return a list of all rides including the driver's name and passenger's name.
+   SELECT R.*, D.name AS driver_name, P.name AS passenger_name
+   FROM Rides R
+   JOIN Drivers D ON R.driver_id = D.driver_id
+   JOIN Passengers P ON R.passenger_id = P.passenger_id;
+
+Problem: Write a query to add a tip field to the Rides table / collection.
+   ALTER TABLE Rides ADD COLUMN tip DECIMAL(6,2);
+   
