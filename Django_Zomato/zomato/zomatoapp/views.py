@@ -5,6 +5,7 @@ from .models import MenuItem, Order
 # Create your views here.
 
 # orders={}
+chat_history=[]
 
 def display_menu(request):
     menu_items = MenuItem.objects.all()
@@ -64,3 +65,43 @@ def update_status(request, order_id):
         except Order.DoesNotExist:
             pass
     return render(request, 'update_order.html', {'order_id': order_id})
+
+def chatbot(request):
+    
+
+    if request.method == 'POST':
+        user_message = request.POST.get('user_message')
+        chatbot_response = generate_chatbot_response(user_message)
+        chat_history.append({'user': user_message, 'chatbot': chatbot_response})
+    else:
+        user_message = None
+        chatbot_response = None
+
+    return render(request, 'chatbot.html', {
+        'user_message': user_message,
+        'chatbot_response': chatbot_response,
+        'chat_history': chat_history
+    })
+
+
+def generate_chatbot_response(user_message):
+    user_message = user_message.lower()
+
+    if user_message == 'menu':
+        menu_items = MenuItem.objects.all()
+        menu_response = "<strong>Here's the list of available dishes:</strong><ul>"
+        for item in menu_items:
+            menu_response += f"<li>{item.dish_name}</li>"
+        menu_response += "</ul>"
+        return menu_response
+    elif user_message == 'order':
+        order_response = '<strong>Sure, let me help you place an order.:</strong> <ol> <li> In the homepage you should see a Take New Order button.</li> <li> Click the button.</li> <li> Then you will be redirected to the Take New Orders Page.</li> <li> After being redirected just follow the form and press the submit button. A new order will be created.</li> </ol>'
+        return order_response
+    elif user_message == "where is my order":
+        return 'Your order is under process! </br>'
+    elif user_message == "hi":
+        return 'Hello! I am Zesty, How can I assist you today? </br>'
+    elif user_message == 'bye':
+        return 'Goodbye! Have a great day! </br>'   
+    else:
+        return "I'm sorry, I didn't understand your message." 
