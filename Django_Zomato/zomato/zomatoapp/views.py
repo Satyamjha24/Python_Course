@@ -91,7 +91,7 @@ def generate_chatbot_response(user_message):
         menu_items = MenuItem.objects.all()
         menu_response = "<strong>Here's the list of available dishes:</strong><ul>"
         for item in menu_items:
-            menu_response += f"<li>{item.dish_name}</li>"
+            menu_response += f"<li>{item.dish_name} => $ {item.price}</li>"
         menu_response += "</ul>"
         return menu_response
     elif user_message == 'order':
