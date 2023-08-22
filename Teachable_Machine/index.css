@@ -1,0 +1,32 @@
+body{
+    background-image:url('https://cdn4.vectorstock.com/i/1000x1000/50/98/vehicle-salon-inside-car-driver-view-with-rudder-vector-20685098.jpg') ;
+    background-color: #cccccc;
+}
+
+#container{
+    width: 30%;
+    margin: auto;
+    margin-top: 15%;
+}
+#start{
+    background-color: gold;
+    color: brown;
+    padding: 5px 15px;
+    font-size: larger;
+    cursor: pointer;
+    margin-left: 40%;
+}
+h1{
+    color: black;
+}
+
+#canvas{
+    margin-left: 23%;
+    margin-top: 10px;
+    /* border: 1px solid red; */
+}
+
+#label-container{
+    color: white;
+    margin-left: 30%;
+}
