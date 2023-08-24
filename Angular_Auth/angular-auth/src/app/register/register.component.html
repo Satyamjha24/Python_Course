@@ -1,0 +1,18 @@
+<form class="p-6 space-y-4" (ngSubmit)="onSubmit()">
+
+    <label class="block text-gray-600" for="username">Username:</label>
+    <input class="block w-full border p-2 rounded" type="text" id="username" name="username" [(ngModel)]="user.username" required>
+  
+    <!-- Email Field -->
+    <label  class="block text-gray-600" for="email">Email:</label>
+    <input  class="block w-full border p-2 rounded" type="email" id="email" name="email" [(ngModel)]="user.email" required>
+  
+    <!-- Password Field -->
+    <label class="block text-gray-600" for="password">Password:</label>
+    <input  class="block w-full border p-2 rounded" type="password" id="password" name="password" [(ngModel)]="user.password" required>
+  
+    <!-- Add more fields if needed -->
+  
+    <!-- Submit Button -->
+    <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" type="submit">Register</button>
+  </form>

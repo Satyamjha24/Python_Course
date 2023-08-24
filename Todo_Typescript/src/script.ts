@@ -40,19 +40,19 @@ async function displayTodos() {
         const response = await fetch("https://todo-typescript-ddgu.onrender.com/todos");
         const fetchedTodos = await response.json();
 
-        //todoList.innerHTML = "";
+        todoList.innerHTML = '';
         fetchedTodos.forEach((todo: Todo, index: number) => {
             const todoItem = document.createElement("div");
-            todoItem.setAttribute("class","flex justify-around p-3 border-3 mt-2 align-middle rounded-lg bg-gray-900 border-1 transition duration-300 text-white")
+            todoItem.setAttribute("class","flex justify-around p-3 border-3 mt-2 align-middle rounded-lg bg-pink-950 border-1 transition duration-300 text-white")
             todoItem.innerHTML = `
             <input class="w-6 text-black" type="checkbox" id="checkbox-${index}" ${todo.status ? "checked" : ""
                 }>
-            <p class="text-gray-100 decoration-dashed font-semibold w-2/3 text-wrap text-lg text-justify font-serif  break-all  p-2 ${todo?.status?'line-through text-gray-200':'normal'}" for="checkbox-${index}">${todo.title}</p>
-            <p class="tracking-wide text-center rounded-lg  flex justify-center align-middle cursor-pointer text-white font-semibold w-28 h-10 my-auto py-1 text-lg ${
+            <p class="text-gray-100 decoration-dashed font-semibold w-2/3 text-wrap capitalize text-lg text-justify font-serif  break-all  p-2 ${todo?.status?'line-through text-gray-200':'normal'} label" for="checkbox-${index}" class="label">${todo.title}</p>
+            <p class="mx-2 tracking-wide text-center rounded-lg  flex justify-center align-middle cursor-pointer text-white font-semibold w-28 h-10 my-auto py-1 px-6 text-lg ${
                 !todo?.status ? "bg-yellow-500 w-24 " : "bg-green-500 p-3"}">${todo.status ? 'Completed' : 'Pending'}</p>
-            <button class="tracking-wide text-center  flex justify-center align-middle cursor-pointer  w-12 h-10 my-auto py-1 text-lg bg-cyan-500 px-3 font-semibold rounded-lg text-md text-white min-w-max" id="edit-button-${index}" class="edit-button">Edit</button>
-            <button id="save-button-${index}" class="save-button" style="display: none;">Save</button>
-            <button class="tracking-wide text-center  flex justify-center align-middle cursor-pointer  w-16 h-10 my-auto py-1 text-lg bg-red-500 px-3 font-semibold rounded-lg text-md text-white min-w-max" id="delete-button-${index}" class="delete-button">Delete</button>
+            <button class="mx-2 tracking-wide text-center  flex justify-center align-middle cursor-pointer w-12 h-10 my-auto py-1 text-lg bg-cyan-500 px-3 font-semibold rounded-lg text-md text-white min-w-max edit-button" id="edit-button-${index}" class="edit-button">Edit</button>
+            <button id="save-button-${index}" class="tracking-wide text-center  flex justify-center align-middle cursor-pointer  w-12 h-10 my-auto py-1 text-lg bg-green-900 px-3 font-semibold rounded-lg text-md text-white min-w-max save-button" style="display: none;">Save</button>
+            <button class="tracking-wide text-center  flex justify-center align-middle cursor-pointer w-16 h-10 my-auto py-1 text-lg bg-red-500 px-3 font-semibold rounded-lg text-md text-white min-w-max" id="delete-button-${index}" class="delete-button">Delete</button>
           `;
             todoList.appendChild(todoItem);
 
@@ -64,9 +64,7 @@ async function displayTodos() {
                 await updateTodoStatus(todo.id, updatedStatus);
             });
 
-            const editButton = todoItem.querySelector(
-                `#edit-button-${index}`
-            ) as HTMLButtonElement;
+            const editButton = todoItem.querySelector(`#edit-button-${index}`) as HTMLButtonElement;
             editButton.addEventListener("click", () => {
                 editTodoTitle(todoItem, todo.title, todo.id); // Call function to enable editing
             });
@@ -108,6 +106,7 @@ async function updateTodoStatus(todoId: Number, newStatus: boolean) {
 
         if (response.ok) {
             console.log("Todo status updated successfully");
+            displayTodos()
         } else {
             console.error("Error updating todo status:", response.status);
         }
@@ -142,10 +141,11 @@ async function updateTodoStatus(todoId: Number, newStatus: boolean) {
 // ... Your existing code ...
 
 function editTodoTitle(todoItem: HTMLDivElement, currentTitle: string, todoId: Number) {
-    const label = todoItem.querySelector("label");
+    const label = todoItem.querySelector(".label") as HTMLParagraphElement;
     const editButton = todoItem.querySelector(".edit-button") as HTMLButtonElement;
     const saveButton = todoItem.querySelector(".save-button") as HTMLButtonElement;
-
+     console.log(label,editButton,editButton);
+     
     if (label && editButton && saveButton) {
         label.style.display = "none";
         editButton.style.display = "none"; // Hide the edit button
@@ -153,6 +153,7 @@ function editTodoTitle(todoItem: HTMLDivElement, currentTitle: string, todoId: N
 
         const editInput = document.createElement("input");
         editInput.type = "text";
+        editInput.style.backgroundColor='black'
         editInput.value = currentTitle;
         todoItem.insertBefore(editInput, label);
 
