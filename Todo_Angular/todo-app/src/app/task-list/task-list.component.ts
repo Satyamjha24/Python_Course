@@ -22,7 +22,7 @@ export class TaskListComponent implements OnInit {
   createNewTask(): void {
     const newTask = {
       title: this.newTaskTitle,
-      completed: this.newTaskCompleted,
+      completed: false,
     };
 
     this.todoService.createTodo(newTask).subscribe((createdTask) => {
