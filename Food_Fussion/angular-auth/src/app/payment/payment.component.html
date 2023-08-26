@@ -1,0 +1,56 @@
+<div class="mt-28 w-1/2 m-auto ">
+  <div class="container mx-auto ">
+    <div class="bg-blue-100 rounded-lg shadow-lg p-8 ">
+      <h2 class="text-3xl font-semibold mb-4 text-center">Make Your Payment</h2>
+
+
+      <!-- Payment Form -->
+      <form (ngSubmit)="onSubmit()">
+        <!-- Expiration Date and CVV Fields -->
+
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-semibold mb-1"
+            >Name on Card</label
+          >
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder="Name on Card"
+            name="cardHolder"
+            [(ngModel)]="cardData.cardHolder"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-semibold mb-1"
+            >Card Number</label
+          >
+          <input
+            type="number"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+            placeholder="Card Number"
+            name="cardNumber"
+            [(ngModel)]="cardData.cardNumber"
+            required
+          />
+        </div>
+        <div class="m-4">
+        <div class="flex items-center border-b pb-4">
+          <div class="ml-4">
+            <h3 class="text-2xl font-semibold text-green-500">
+              Total Cart Value: ₹{{ paymentTotal | number : "1.2-2" }}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+        <button
+          type="submit"
+          class="w-full bg-yellow-500 text-black font-semibold py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-200"
+        >
+          Pay Now
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

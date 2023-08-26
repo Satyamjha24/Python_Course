@@ -1,0 +1,86 @@
+<div class="p-16 pt-28">
+  <h1 class="text-3xl font-bold mb-4 text-center">SHOPPING CART</h1>
+
+  <!-- Check if cartItems array is empty -->
+  <ng-container *ngIf="cartItems.length === 0; else cartItemsList">
+    <!-- Display this when cart is empty -->
+    <div class="text-center">
+      <img
+        src="https://www.eyecatchers.in/shop-online/images/cart-empty.jpg"
+        alt="Empty Cart"
+        class="mx-auto w-1/1"
+      />
+    </div>
+  </ng-container>
+
+  <!-- Display cartItems when cart is not empty -->
+  <ng-template #cartItemsList>
+    <div
+      *ngFor="let item of cartItems"
+      class="mb-4 border rounded-lg p-6 flex justify-between w-full shadow-md"
+    >
+      <!-- Rest of your existing code for displaying product cards -->
+
+      <div>
+        <img
+          [src]="item.strCategoryThumb"
+          alt="Category Image"
+          class="my-4 w-full"
+        />
+      </div>
+      <div class="w-2/3">
+        <br />
+        <h1 class="text-2xl font-bold">{{ item.strCategory }}</h1>
+        <p class="text-gray-600 line-clamp-2">
+          {{ item.strCategoryDescription }}
+        </p>
+        <br />
+        <p class="font-bold text-xl">Price: ₹{{ item.price }}</p>
+        <br />
+        <div class="flex items-center mt-2 justify-between">
+          <div class="flex items-center">
+            <button
+              class="{{
+                item.quantity === 1
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-blue-500'
+              }} text-white px-2 py-1 rounded mr-2 "
+              [disabled]="item.quantity === 1"
+              (click)="decreaseQuantity(item)"
+            >
+              -
+            </button>
+            <p class="font-bold">{{ item.quantity }}&nbsp;</p>
+            <button
+              class="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+              (click)="increaseQuantity(item)"
+            >
+              +
+            </button>
+          </div>
+
+          <button
+            class="bg-red-500 text-white px-2 py-1 rounded mr-2"
+            (click)="removeItem(item.id)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 px-4">
+      <p class="text-xl font-bold text-right">
+        Cart Total: ₹{{ total | number : "1.2-2" }}
+      </p>
+    </div>
+    <div class="flex justify-end pr-12">
+      <button
+        routerLink="/payment"
+        class="bg-green-500 text-white px-6 py-3 rounded-full mt-8"
+      >
+        Checkout
+      </button>
+    </div>
+  </ng-template>
+</div>
