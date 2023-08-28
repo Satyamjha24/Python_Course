@@ -7,9 +7,14 @@ import { PostService } from '../post.service';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent {
-  constructor(public postService: PostService) {}
+  posts:any[]=[]
+  constructor(private postService: PostService) {
+    this.posts=this.postService.getPosts()
+  }
+  
 
   deletePost(postId: number): void {
     this.postService.deletePost(postId);
+    this.posts=this.posts.filter(post=>post.id!=postId)
   }
 }

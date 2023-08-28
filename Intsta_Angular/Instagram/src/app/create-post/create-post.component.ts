@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { PostListComponent } from '../post-list/post-list.component';
 import { PostService } from '../post.service';
 
 @Component({
