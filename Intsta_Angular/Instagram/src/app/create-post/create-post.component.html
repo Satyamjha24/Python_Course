@@ -1,0 +1,6 @@
+<p>create-post works!</p>
+<form>
+    <input [(ngModel)]="newPost.title" placeholder="Title" type="text">
+    <textarea  [(ngModel)]="newPost.content" placeholder="Content"></textarea>
+    <button (click)="addPost()">Add New Post</button>
+</form>
